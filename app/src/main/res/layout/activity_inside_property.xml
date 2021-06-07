@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".insideProperty">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/AppbarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        >
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView android:layout_marginTop="30dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView"
+        android:layout_below="@+id/AppbarLayout">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:layout_below="@+id/AppbarLayout">
+
+
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/AppbarLayout">
+
+        <ImageView
+            android:id="@+id/property_image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:padding="10dp"
+            android:layout_marginTop="2dp"
+            android:scaleType="fitXY"
+            />
+
+        <ImageView
+            android:id="@+id/favourite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_favorite_24_white"
+            android:layout_alignParentEnd="true"
+            android:padding="10dp"
+            />
+
+    </RelativeLayout>
+
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        app:cardElevation="10dp"
+        android:layout_below="@+id/relativeLayout">
+
+        <TextView
+            android:id="@+id/property_address"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="Address"
+            android:padding="10dp"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="#797979"
+            />
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_gravity="right"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:textColor="#797979"
+            android:text="hey"
+            android:layout_alignParentEnd="true"
+            android:paddingEnd="10dp"
+           />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        app:cardElevation="10dp"
+        android:layout_below="@+id/cardview1">
+
+        <TextView
+            android:id="@+id/size"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Size"
+            android:padding="10dp"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="#797979"
+            />
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Plot Area"
+            android:padding="10dp"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="#797979"
+            android:layout_gravity="center"
+            />
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Verified"
+            android:padding="10dp"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="#797979"
+            android:textAlignment="textEnd"
+            android:layout_gravity="right"
+            />
+
+    </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            app:cardElevation="10dp"
+            android:layout_below="@+id/cardview2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Property Description"
+                android:paddingStart="10dp"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:textColor="#797979"
+                android:layout_gravity="left"
+                android:drawableTint="@color/colorPrimary"
+
+                />
+
+            <TextView
+                android:id="@+id/propertydescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Description of house/Property"
+                android:drawablePadding="5dp"
+                android:paddingStart="20dp"
+                android:paddingTop="30dp"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:textColor="#797979"
+
+
+                />
+
+        </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        app:cardElevation="10dp"
+        android:layout_below="@+id/cardview4">
+
+        <TextView
+            android:id="@+id/overview"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Overview"
+            android:paddingStart="10dp"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="#797979"
+            android:layout_gravity="left"
+            android:drawableTint="@color/colorPrimary"
+
+            />
+
+        <TextView
+            android:id="@+id/bedroom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4 Bedrooms"
+            android:drawablePadding="5dp"
+            android:drawableStart="@drawable/ic_baseline_single_bed_24"
+            android:paddingStart="20dp"
+            android:paddingTop="30dp"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="#797979"
+            android:layout_gravity="left"
+            android:drawableTint="@color/colorPrimary"
+
+            />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="16/02/2021"
+            android:drawablePadding="5dp"
+            android:drawableStart="@drawable/ic_baseline_calendar_today_24"
+            android:paddingEnd="20dp"
+            android:paddingTop="30dp"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="#797979"
+            android:layout_gravity="right"
+            android:drawableTint="@color/colorPrimary"
+
+            />
+
+        <TextView
+            android:id="@+id/bathroom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="9 Bathrooms"
+            android:drawablePadding="5dp"
+            android:drawableStart="@drawable/ic_baseline_bathtub_24"
+            android:paddingStart="20dp"
+            android:paddingTop="60dp"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="#797979"
+            android:layout_gravity="left"
+            android:drawableTint="@color/colorPrimary"
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Immediately"
+            android:paddingEnd="20dp"
+            android:drawableStart="@drawable/ic_baseline_vpn_key_24"
+            android:drawablePadding="5dp"
+            android:paddingTop="60dp"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="#797979"
+            android:layout_gravity="right"
+            android:drawableTint="@color/colorPrimary"
+
+            />
+
+        <TextView
+            android:id="@+id/balcony"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="5dp"
+            android:text="5 Balconies"
+            android:drawableStart="@drawable/ic_baseline_location_city_24"
+            android:paddingStart="20dp"
+            android:paddingTop="90dp"
+            android:drawableTint="@color/colorPrimary"
+
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="#797979"
+            android:layout_gravity="left"
+            />
+
+        <TextView
+            android:id="@+id/apartmentType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Apartment"
+            android:paddingEnd="20dp"
+            android:paddingTop="90dp"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="#797979"
+            android:layout_gravity="right"
+            />
+
+        <TextView
+            android:id="@+id/propertyage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="5dp"
+            android:text="Age-"
+            android:drawableStart="@drawable/ic_baseline_hourglass_empty_24"
+            android:paddingStart="20dp"
+            android:paddingTop="120dp"
+            android:drawableTint="@color/colorPrimary"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="#797979"
+            android:layout_gravity="left"
+            />
+
+        <TextView
+            android:id="@+id/water"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Immediately"
+            android:paddingEnd="20dp"
+            android:drawableStart="@drawable/ic_drop"
+            android:drawablePadding="5dp"
+            android:paddingTop="120dp"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="#797979"
+            android:layout_gravity="right"
+            android:drawableTint="@color/colorPrimary"
+
+            />
+
+        <TextView
+            android:id="@+id/sanction1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="5dp"
+            android:text="Age-"
+            android:drawableStart="@drawable/ic_mace"
+            android:paddingStart="20dp"
+            android:paddingTop="150dp"
+            android:drawableTint="@color/colorPrimary"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="#797979"
+            android:layout_gravity="left"
+            />
+
+        <TextView
+            android:id="@+id/furnished"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Immediately"
+            android:paddingEnd="20dp"
+            android:drawableStart="@drawable/ic_furniture"
+            android:drawablePadding="5dp"
+            android:paddingTop="150dp"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="#797979"
+            android:layout_gravity="right"
+            android:drawableTint="@color/colorPrimary"
+
+            />
+
+    </androidx.cardview.widget.CardView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+    <Button
+        android:id="@+id/contactUs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contact Us?"
+        android:drawableStart="@drawable/ic_baseline_phone_24"
+        android:textSize="13dp"
+        android:textColor="#ffffff"
+        android:drawableTint="#ffffff"
+        android:layout_marginTop="10dp"
+        android:padding="20dp"
+        android:drawablePadding="5dp"
+        android:layout_alignParentLeft="true"
+        android:backgroundTint="#fe2c54"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buyProperty"
+        android:drawableTint="#ffffff"
+        android:drawablePadding="5dp"
+        android:text="Buy Property"
+        android:textColor="#ffffff"
+        android:layout_marginTop="10dp"
+        android:drawableStart="@drawable/ic_baseline_home_24"
+        android:textSize="13dp"
+        android:padding="20dp"
+        android:layout_alignParentEnd="true"
+        android:backgroundTint="@color/colorAccent"
+        />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
