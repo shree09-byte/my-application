@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_baseline_search_24"
+            android:title="Search"
+            android:iconTint="#ffffff"/>
+        <item
+            android:id="@+id/nav_liked"
+            android:icon="@drawable/ic_baseline_favorite_24"
+            android:title="Liked"
+            android:iconTint="#ffffff"
+            />
+
+        <item
+            android:id="@+id/nav_property"
+            android:icon="@drawable/ic_baseline_home_24"
+            android:title="My Property"
+            android:iconTint="#ffffff"/>
+
+        <item
+            android:id="@+id/nav_order"
+            android:icon="@drawable/ic_baseline_shopping_cart_24"
+            android:title="My Orders"
+            android:iconTint="#ffffff"/>
+
+        <item
+            android:id="@+id/nav_notification"
+            android:icon="@drawable/ic_baseline_notifications_24"
+            android:title="My Notification"
+            android:iconTint="#ffffff"/>
+        <item
+            android:id="@+id/nav_addproperty"
+            android:icon="@drawable/ic_baseline_add_24"
+            android:title="Add Property"
+            android:iconTint="#ffffff"/>
+
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/ic_baseline_settings_24"
+            android:title="Settings"
+            android:iconTint="#ffffff"/>
+        <item
+            android:id="@+id/nav_news"
+            android:icon="@drawable/ic_baseline_assignment_24"
+            android:title="News"
+            android:iconTint="#ffffff"/>
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/logout"
+            android:title="Logout"
+            android:iconTint="#ffffff"/>
+    </group>
+</menu>

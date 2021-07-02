@@ -7,11 +7,14 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +48,7 @@ public class insideProperty extends AppCompatActivity {
         phone = getIntent().getStringExtra("phone");
 
 
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("View Property");
         setSupportActionBar(toolbar);
@@ -65,47 +69,67 @@ public class insideProperty extends AppCompatActivity {
         bedroom = (TextView) findViewById(R.id.bedroom);
         water = (TextView) findViewById(R.id.water);
         furnish = (TextView) findViewById(R.id.furnished);
-        sanction = (TextView) findViewById(R.id.sanction1);
+//        sanction = (TextView) findViewById(R.id.sanction1);
         propertyage = (TextView) findViewById(R.id.propertyage);
         propertydescription = (TextView) findViewById(R.id.propertydescription);
 
 
         contactusbtn = (Button) findViewById(R.id.contactUs);
-        buypropertybtn = (Button) findViewById(R.id.buyProperty);
-        final DatabaseReference orderref = FirebaseDatabase.getInstance().getReference().child("Orders");
-        final DatabaseReference userorderref = FirebaseDatabase.getInstance().getReference().child("Users").child(Prevalent.currentonlineUser.getPhone()).child("UserOrder");
-        final DatabaseReference notificaitonorderref = FirebaseDatabase.getInstance().getReference().child("Users");
-
-
-        final DatabaseReference DataRef;
-        DataRef = FirebaseDatabase.getInstance().getReference().child("Favourite List").child("User View").child(Prevalent.currentonlineUser.getPhone()).child("Property").child(propertyId);
-
-        //VeryVeryHard been awake all night @lordBakayarou
-        DataRef.addValueEventListener(new ValueEventListener() {
+        contactusbtn.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.child("Liked").exists())
-                {
-                    favourite.setImageResource(R.drawable.ic_baseline_favorite_24_red);
-                }
-                else {
-
-                    favourite.setImageResource(R.drawable.ic_baseline_favorite_24_white);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
+            public boolean onLongClick(View v) {
+                android.widget.PopupMenu popupMenu = new android.widget.PopupMenu(getApplicationContext(),contactusbtn);
+                popupMenu.getMenuInflater().inflate(R.menu.popmenu, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()){
+                            case R.id.nav_Contact:
+                                Intent intent = new Intent(Intent.ACTION_DIAL);
+                                intent.setData(Uri.parse("tel:+ 18900090000"));
+                                startActivity(intent);
+                        }
+                        return false;
+                    }
+                });
+                popupMenu.show();
+                return false;
             }
         });
 
-        buypropertybtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                        buypropertybtn = (Button) findViewById(R.id.buyProperty);
+                        final DatabaseReference orderref = FirebaseDatabase.getInstance().getReference().child("Orders");
+                        final DatabaseReference userorderref = FirebaseDatabase.getInstance().getReference().child("Users").child(Prevalent.currentonlineUser.getPhone()).child("UserOrder");
+                        final DatabaseReference notificaitonorderref = FirebaseDatabase.getInstance().getReference().child("Users");
 
-                Intent intent = new Intent(insideProperty.this, FavActivity.class);
-                startActivity(intent);
+
+                        final DatabaseReference DataRef;
+                        DataRef = FirebaseDatabase.getInstance().getReference().child("Favourite List").child("User View").child(Prevalent.currentonlineUser.getPhone()).child("Property").child(propertyId);
+
+                        //VeryVeryHard been awake all night @lordBakayarou
+                        DataRef.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (snapshot.child("Liked").exists()) {
+                                    favourite.setImageResource(R.drawable.ic_baseline_favorite_24_red);
+                                } else {
+
+                                    favourite.setImageResource(R.drawable.ic_baseline_favorite_24_white);
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+                        buypropertybtn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                                Intent intent = new Intent(insideProperty.this, FavActivity.class);
+                                startActivity(intent);
 //                orderref.addListenerForSingleValueEvent(new ValueEventListener() {
 //                    @Override
 //                    public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -194,7 +218,6 @@ public class insideProperty extends AppCompatActivity {
 //                            userdataMap.put("ownerPhone", coustphone);
 
 
-
 //                        }
 //
 //                    }
@@ -206,47 +229,44 @@ public class insideProperty extends AppCompatActivity {
 //                });
 //
 //
-            }
-        });
+                            }
+                        });
 
 
+                        favourite.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                final DatabaseReference DataRef, Phoneref;
+                                DataRef = FirebaseDatabase.getInstance().getReference().child("Favourite List").child("User View").child(Prevalent.currentonlineUser.getPhone()).child("Property").child(propertyId);
 
-        favourite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final DatabaseReference DataRef, Phoneref;
-                DataRef = FirebaseDatabase.getInstance().getReference().child("Favourite List").child("User View").child(Prevalent.currentonlineUser.getPhone()).child("Property").child(propertyId);
+                                DataRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        if (snapshot.child("Liked").exists()) {
+                                            DataRef.removeValue();
+                                            Toast.makeText(insideProperty.this, "Disliked", Toast.LENGTH_SHORT).show();
+                                            favourite.setImageResource(R.drawable.ic_baseline_favorite_24_white);
+                                        } else {
+                                            checkLike = "yes";
+                                            favourite.setImageResource(R.drawable.ic_baseline_favorite_24_red);
 
-                DataRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.child("Liked").exists())
-                        {
-                            DataRef.removeValue();
-                            Toast.makeText(insideProperty.this, "Disliked", Toast.LENGTH_SHORT).show();
-                            favourite.setImageResource(R.drawable.ic_baseline_favorite_24_white);
-                        }
-                        else {
-                            checkLike = "yes";
-                            favourite.setImageResource(R.drawable.ic_baseline_favorite_24_red);
+                                            addingToFavourite();
+                                        }
+                                    }
 
-                            addingToFavourite();
-                        }
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+
+                            }
+                        });
+
+                        getPropertyDetails(propertyId);
                     }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
-            }
-        });
-
-        getPropertyDetails(propertyId);
-    }
-
-    private void addingToFavourite() {
+                    private void addingToFavourite() {
 //        DatabaseReference productref = FirebaseDatabase.getInstance().getReference().child("PropertyDetails");
 //        productref.child(propertyId).addValueEventListener(new ValueEventListener() {
 //            @Override
@@ -264,106 +284,105 @@ public class insideProperty extends AppCompatActivity {
 //            }
 //        });
 
-        String savecurrenttime, savecurrentdate;
-        Calendar callfordate = Calendar.getInstance();
-        SimpleDateFormat currentDate = new SimpleDateFormat("MM dd, YYYY");
-        savecurrentdate = currentDate.format(callfordate.getTime());
+                        String savecurrenttime, savecurrentdate;
+                        Calendar callfordate = Calendar.getInstance();
+                        SimpleDateFormat currentDate = new SimpleDateFormat("MM dd, YYYY");
+                        savecurrentdate = currentDate.format(callfordate.getTime());
 
-        SimpleDateFormat currenttime = new SimpleDateFormat("HH:mm:ss a");
-        savecurrenttime = currentDate.format(callfordate.getTime());
+                        SimpleDateFormat currenttime = new SimpleDateFormat("HH:mm:ss a");
+                        savecurrenttime = currentDate.format(callfordate.getTime());
 
-       final  DatabaseReference favouriteref = FirebaseDatabase.getInstance().getReference().child("Favourite List");
+                        final DatabaseReference favouriteref = FirebaseDatabase.getInstance().getReference().child("Favourite List");
 
-        final HashMap<String, Object> favmap = new HashMap<>();
-        favmap.put("pid", propertyId);
-        favmap.put("address", address.getText().toString());
-        favmap.put("price", price.getText().toString());
-        favmap.put("date", savecurrentdate);
-        favmap.put("time", savecurrenttime);
-        favmap.put("size", size.getText().toString());
-        favmap.put("image", downloadUrl);
-        favmap.put("Liked", checkLike);
-        favmap.put("phone", phone);
-        favouriteref.child("User View").child(Prevalent.currentonlineUser.getPhone()).child("Property").child(propertyId)
-                .updateChildren(favmap)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()){
-                            favouriteref.child("Admin View").child(Prevalent.currentonlineUser.getPhone()).child("Property").child(propertyId)
-                                    .updateChildren(favmap)
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()){
-                                                Toast.makeText(insideProperty.this, "Added to Fav", Toast.LENGTH_SHORT).show();
-                                            }
+                        final HashMap<String, Object> favmap = new HashMap<>();
+                        favmap.put("pid", propertyId);
+                        favmap.put("address", address.getText().toString());
+                        favmap.put("price", price.getText().toString());
+                        favmap.put("date", savecurrentdate);
+                        favmap.put("time", savecurrenttime);
+                        favmap.put("size", size.getText().toString());
+                        favmap.put("image", downloadUrl);
+                        favmap.put("Liked", checkLike);
+                        favmap.put("phone", phone);
+                        favouriteref.child("User View").child(Prevalent.currentonlineUser.getPhone()).child("Property").child(propertyId)
+                                .updateChildren(favmap)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            favouriteref.child("Admin View").child(Prevalent.currentonlineUser.getPhone()).child("Property").child(propertyId)
+                                                    .updateChildren(favmap)
+                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                            if (task.isSuccessful()) {
+                                                                Toast.makeText(insideProperty.this, "Added to Fav", Toast.LENGTH_SHORT).show();
+                                                            }
+                                                        }
+                                                    });
                                         }
-                                    });
-                        }
+                                    }
+                                });
+
+                        finish();
                     }
-                });
 
-        finish();
-    }
+                    private void getPropertyDetails(final String propertyId) {
 
-    private void getPropertyDetails(final String propertyId) {
-
-        DatabaseReference productref = FirebaseDatabase.getInstance().getReference().child("PropertyDetails");
-        DatabaseReference productimageref = FirebaseDatabase.getInstance().getReference().child("PropertyDetails").child("PropertyImage");
+                        DatabaseReference productref = FirebaseDatabase.getInstance().getReference().child("PropertyDetails");
+                        DatabaseReference productimageref = FirebaseDatabase.getInstance().getReference().child("PropertyDetails").child("PropertyImage");
 
 
-        final DatabaseReference DataRef = FirebaseDatabase.getInstance().getReference().child("Favourite List").child("User View").child(Prevalent.currentonlineUser.getPhone()).child("Property").child(propertyId);
-        productref.child(propertyId).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
-                    PropertyDetails property = snapshot.getValue(PropertyDetails.class);
-                    address.setText(property.getAddress());
-                    price.setText("$ " + property.getPrice());
-                    size.setText(property.getPropertySize() + " Sq.ft");
-                    balcony.setText(property.getBalcony() + " Balcony");
-                    phone = property.getPhone();
-                    char ch = property.getBhkType().toString().charAt(0);
+                        final DatabaseReference DataRef = FirebaseDatabase.getInstance().getReference().child("Favourite List").child("User View").child(Prevalent.currentonlineUser.getPhone()).child("Property").child(propertyId);
+                        productref.child(propertyId).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (snapshot.exists()) {
+                                    PropertyDetails property = snapshot.getValue(PropertyDetails.class);
+                                    address.setText(property.getAddress());
+                                    price.setText("$ " + property.getPrice());
+                                    size.setText(property.getPropertySize() + " Sq.ft");
+                                    balcony.setText(property.getBalcony() + " Balcony");
+                                    phone = property.getPhone();
+                                    char ch = property.getBhkType().toString().charAt(0);
 
-                    date.setText(property.getSaveCurrentDate());
-                    bedroom.setText(String.valueOf(ch)+ " Bedrooms");
-                    bathroom.setText(property.getBathroom()+ " Bathroom");
-                    downloadUrl = property.getDownloadImageUrl0();
-                    Picasso.get().load(downloadUrl).into(imageView);
-                    downloadUrl = property.getDownloadImageUrl();
-                    propertyage.setText("Age "+ property.getPropertyAge());
-                    water.setText(property.getWaterSupply());
-                    sanction.setText(property.getSanction());
-                    furnish.setText(property.getFurnishing()+ " Furnish");
-                    propertydescription.setText(property.getProperty_description());
+                                    date.setText(property.getSaveCurrentDate());
+                                    bedroom.setText(String.valueOf(ch) + " Bedrooms");
+                                    bathroom.setText(property.getBathroom() + " Bathroom");
+                                    downloadUrl = property.getDownloadImageUrl0();
+                                    Picasso.get().load(downloadUrl).into(imageView);
+                                    downloadUrl = property.getDownloadImageUrl();
+                                    propertyage.setText("Age " + property.getPropertyAge());
+                                    water.setText(property.getWaterSupply());
+//                    sanction.setText(property.getSanction());
+                                    furnish.setText(property.getFurnishing() + " Furnish");
+                                    propertydescription.setText(property.getProperty_description());
 
 
+                                }
+                            }
 
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+                        productimageref.child(propertyId).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (snapshot.exists()) {
+                                    PropertyDetails property = snapshot.getValue(PropertyDetails.class);
+
+                                    Picasso.get().load(property.getDownloadImageUrl()).into(imageView);
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+                    }
                 }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        productimageref.child(propertyId).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
-                    PropertyDetails property = snapshot.getValue(PropertyDetails.class);
-
-                    Picasso.get().load(property.getDownloadImageUrl()).into(imageView);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-    }
-}

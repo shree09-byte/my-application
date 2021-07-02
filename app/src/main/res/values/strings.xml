@@ -52,10 +52,10 @@
 
     </string-array>
     <string-array name="Sanction_Spinner_items">
-        <item>Select Sanction Type</item>
-        <item>Sanctioned</item>
-        <item>Not Sanction</item>
-        <item>In Progress</item>
+        <item>Select Below</item>
+        <item>PowerBackup available</item>
+        <item>CCTV cameras</item>
+        <item>Both</item>
     </string-array>
     <string-array name="City_Spinner_items">
         <item>Select City</item>
@@ -83,4 +83,6 @@
     values-round/strings.xml for round devices.
     -->
     <string name="hello_world">Hello Square World!</string>
+    <string name="menu_Contact">Contact</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

@@ -84,6 +84,24 @@
             android:textStyle="bold"
             android:textColor="#797979"
             />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="32dp">
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="29dp"
+                android:layout_height="25dp"
+                android:background="@drawable/ic_baseline_my_location_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.698"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/price"
@@ -341,21 +359,21 @@
 
             />
 
-        <TextView
-            android:id="@+id/sanction1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawablePadding="5dp"
-            android:text="Age-"
-            android:drawableStart="@drawable/ic_mace"
-            android:paddingStart="20dp"
-            android:paddingTop="150dp"
-            android:drawableTint="@color/colorPrimary"
-            android:textSize="15dp"
-            android:textStyle="bold"
-            android:textColor="#797979"
-            android:layout_gravity="left"
-            />
+<!--        <TextView-->
+<!--            android:id="@+id/sanction1"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:drawablePadding="5dp"-->
+<!--            android:text="Age-"-->
+<!--            android:drawableStart="@drawable/ic_mace"-->
+<!--            android:paddingStart="20dp"-->
+<!--            android:paddingTop="150dp"-->
+<!--            android:drawableTint="@color/colorPrimary"-->
+<!--            android:textSize="15dp"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textColor="#797979"-->
+<!--            android:layout_gravity="left"-->
+<!--            />-->
 
         <TextView
             android:id="@+id/furnished"
